@@ -1,0 +1,276 @@
+{
+  "TYPES": {
+    "Actor": {
+      "runner": "Correria",
+      "hunter": "Caçador"
+    },
+    "Item": {
+      "item": "Item",
+      "augmentation": "Ampliação"
+    }
+  },
+  "EXPAND": "EXPANDIR",
+  "COLLAPSE": "MINIMIZAR",
+  "EDIT": "EDITAR",
+  "RUNNER": {
+    "SR": "RESISTÊNCIA ESPECIAL",
+    "DEBT": "DÉBITO",
+    "CRED": "CRED",
+    "STRESS": "ESTRESSE",
+    "GLICHED": "BUGADO",
+    "OVERLOAD": {
+      "name": "SOBRECARGA",
+      "desc": "<p>Quando você marcar seu último ⚡, uma Atitude à sua escola fica permanentemente <em>BUGADA</em> e uma complicação, como:</p><ul><li>Você é tirada de ação.</li><li>Você expõe o ponto fraco da equipe.</li><li>Você faz a equipe perder uma vantagem.</li><li>Você danifica ou se descuida de algo crucial.</li></ul><p>Enquanto <strong>SOBRECARREGADA</strong> você não pode fazer ações que exijam ⚡. <strong>RECUPERE O FÔLEGO</strong> para recuperar ⚡ e se livrar desse estado.</p>"
+    },
+    "AUG": "AMPLIAÇÃO",
+    "ABILITY": "CAPACIDADE"
+  },
+  "HUNTER": {
+    "ACTIVATION": "ATIVAÇÃO",
+    "COUNTER": "REAÇÃO",
+    "RANK": "CLASSE",
+    "PICK": "PEGUE",
+    "UPGRADE": "MELHORIA"
+  },
+  "Approach": {
+    "name": "ATITUDES",
+    "DETAILS": "DETALHES",
+    "AGGRESSIVE": {
+      "name": "AGRESSIVA",
+      "flaw": "HESITAÇÃO",
+      "desc": "FORÇA INTIMIDAÇÃO DESTRUIÇÃO"
+    },
+    "SMART": {
+      "name": "SAGAZ",
+      "flaw": "DESORIENTAÇÃO",
+      "desc": "CRIATIVIDADE ASTÚCIA PERCEPÇÃO"
+    },
+    "EMPATHIC": {
+      "name": "EMPÁTICA",
+      "flaw": "APATIA",
+      "desc": "CARISMA LIDERANÇA DIPLOMACIA"
+    },
+    "STEALTHY": {
+      "name": "FURTIVA",
+      "flaw": "IMPRUDÊNCIA",
+      "desc": "DISCRIÇÃO DISSIMULAÇÃO SIGILO"
+    }
+  },
+  "Skill": {
+    "name": "PERÍCIAS",
+    "ANALYZE": {
+      "name": "ANÁLISE",
+      "PEOPLE": "PESSOAS",
+      "SITUATION": "SITUAÇÃO",
+      "INFORMATION": "INFORMAÇÃO"
+    },
+    "ATHLETICS": {
+      "name": "ATLETISMO",
+      "SPRINT": "CORRIDA",
+      "PARKOUR": "PARKOUR",
+      "SWIM": "NATAÇÃO",
+      "CLIMB": "ESCALADA"
+    },
+    "CLOSE": {
+      "name": "MANO A MANO",
+      "BRAWLING": "BRIGA",
+      "KNIFE": "FACA",
+      "SWORD": "ESPADA",
+      "BAT": "TACO",
+      "WIRE": "ARAME"
+    },
+    "CODING": {
+      "name": "PROGRAMAÇÃO",
+      "HACK": "INVASÃO",
+      "COMPILE": "COMPILAÇÃO",
+      "MINE": "MINERAR",
+      "SCRAMBLE": "EMBARALHAR"
+    },
+    "INFLUENCE": {
+      "name": "INFLUÊNCIA",
+      "PERFORM": "APRESENTAÇÃO",
+      "NEGOTIATE": "NEGOCIAÇÃO",
+      "INTIMIDATE": "INTIMIDAÇÃO"
+    },
+    "PILOTING": {
+      "name": "PILOTAGEM",
+      "CARS": "CARROS",
+      "BIKES": "MOTOS",
+      "CHOPPERS": "HELICÓPTEROS",
+      "DRONES": "DRONES"
+    },
+    "RANGED": {
+      "name": "TIRO",
+      "PISTOL": "PISTOLA",
+      "RIFLE": "RIFLE",
+      "SMG": "SMG",
+      "THROWING": "ARREMESSO"
+    },
+    "RIGGING": {
+      "name": "GAMBIARRA",
+      "ELETRONICS": "ELETRÔNICA",
+      "ROBOTICS": "ROBÓTICA",
+      "HEAVY": "MÁQ. PESADO"
+    },
+    "SCIENCES": {
+      "name": "CIÊNCIAS",
+      "BIOTECH": "BIOTECNOLOGIA",
+      "PHYSICS": "FÍSICA",
+      "CHEMISTRY": "QUÍMICA"
+    },
+    "STREETWISE": {
+      "name": "MALANDRAGEM",
+      "POLITICS": "POLÍTICA",
+      "MARKET": "MERCADO",
+      "NAVIGATION": "NAVEGAÇÃO"
+    },
+    "ATTUNE": {
+      "name": "SINTONIA",
+      "SPIRITS": "ESPÍRITOS",
+      "ARTIFACTS": "ARTEFATOS",
+      "PLACES": "LUGARES"
+    }
+  },
+  "ROLL": {
+    "Effect": "EFEITO",
+    "Threat": "AMEAÇA",
+    "Dice": "DADO",
+    "ResistRoll": "ROLAR RESISTÊNCIA",
+    "ActionRoll": "ROLAR AÇÃO",
+    "BreathRoll": "RECUPERAR FÔLEGO",
+    "AngelRoll": "ROLAR AJUDA"
+  },
+  "ANGEL": {
+    "crit": {
+      "title": "MUITO BEM SUCEDIDA",
+      "desc": "Após as demais jogadoras terminarem, escolha uma para oferecer uma mãozinha e melhore o resultado dela em um passo. Descrevam juntas como isso ocorre na ficção."
+    },
+    "succ": {
+      "title": "SAIU PRATICAMENTE INTACTA",
+      "desc": "Por que isso não te dá a sensação de vitória?"
+    },
+    "part": {
+      "title": "CONSEGUIU, MAS...",
+      "desc": "Você sabe que não vai durar. Como é que se arranja?"
+    },
+    "fail": {
+      "title": "FALHOU...",
+      "desc": "Como foi que suas ações só conseguiram piorar ainda mais sua situação?"
+    }
+  },
+  "BREATH": {
+    "crit": {
+      "title": "VOCÊ JÁ PASSOU POR COISA BEM PIOR",
+      "desc": "<strong>APAGUE TODO O ⚡</strong> -OU- <strong>IGNORE AMBOS</strong> OS NÍVEIS 1 E 2 DE PENALIDADES POR DANO PELO RESTO DO CORRE."
+    },
+    "succ": {
+      "title": "PARECE QUE JÁ DEU",
+      "desc": "<strong>APAGUE⚡⚡⚡</strong> -OU- <strong>IGNORE</strong> OU O NÍVEL O1 OU O NÍVEL 2 DE PENALIDADES POR DANO PELO RESTO DO CORRE."
+    },
+    "part": {
+      "title": "ENGOLE O CHORO",
+      "desc": "<strong>APAGUE ⚡⚡</strong> -OU- <strong>IGNORE</strong> O NÍVEL 1 DE PENALIDADES POR DANO PELO RESTO DO CORRE."
+    },
+    "fail": {
+      "title": "FEZ O QUE DEU",
+      "desc": "APAGUE ⚡"
+    }
+  },
+  "RESIST": {
+    "crit": {
+      "title": "GG",
+      "desc": "É ISSO."
+    },
+    "succ": {
+      "title": "SUBSTANCIAL",
+      "desc": "MARQUE ⚡"
+    },
+    "part": {
+      "title": "NADA MAL",
+      "desc": "MARQUE ⚡⚡"
+    },
+    "fail": {
+      "title": "QUASE",
+      "desc": "MARQUE ⚡⚡⚡"
+    }
+  },
+  "ACTION": {
+    "crit": {
+      "title": "Crítico",
+      "desc": "PJ é bem sucedida e ainda consegue um extra (▲E, revelar um segrado, melhorar posição, localizar um alvo)."
+    },
+    "succ": {
+      "title": "Sucesso",
+      "desc": "Tudo nos conformes."
+    },
+    "part": {
+      "title": "Sucesso Parcial",
+      "desc": "É um sucesso, mas acompanhado de uma <strong>Consequência</strong>."
+    },
+    "fail": {
+      "title": "Falha",
+      "desc": "As coisas dão errado pra PJ, que alhem de falhar, sofre uma <strong>Consequência</strong>."
+    },
+    "GLICHED": {
+      "hard": "Ele ativa uma <strong>Consequência de Nível 2</strong> que não pode ser resistida.",
+      "normal": "A <strong>Consequência</strong> adicional pode ser resistida normalmente."
+    }
+  },
+  "GEAR": {
+    "name": "EQUIPAMENTO",
+    "BLADE": "UMA LÂMINA OU DUAS",
+    "SIDEARM": "ARMA SOBRESSALENTE",
+    "SUBMACHINE": "SUBMETRALHADORA",
+    "LARGEHEAVY": "ARMA GRANDE/PESADA",
+    "TRACKING": "DISPOSITIVO DE RASTREIO",
+    "CYBERDECK": "CYBERDECK",
+    "SDRONE": {
+      "name": "DRONE PEQUENO",
+      "desc": "FURTIVO OU RÁPIDO"
+    },
+    "MDRONE": {
+      "name": "DRONE MÉDIO",
+      "desc": "RESISTENTE OU AGRESSIVO"
+    },
+    "BATTERY": "BATERIA EXTRA",
+    "MEDKIT": "KIT MÉDICO",
+    "DISGUISE": "DISFARCE OU CAMUFLAGEM",
+    "ARMOR": "ARMADURA",
+    "AHEAVY": "+PESADA",
+    "INFILTRATION": "EQUIP. DE INFILTRAÇÃO",
+    "AMMO": {
+      "name": "MUNIÇÃO EXTRA",
+      "desc": "PADRÃO / PERFURANTE / EXPLOSIVA / INCENDIÁRIA"
+    },
+    "SURVIVAL": {
+      "name": "KIT DE SOBREVIVÊNCIA",
+      "desc": "MÁSCARA, RAÇÃO, ÁGUA / AR"
+    },
+    "GRENADES": {
+      "name": "GRANADAS",
+      "desc": "PEM / GÁS / ARTODOAR / INCEND. / FRAG."
+    },
+    "DEMOLITION": "FERRAM. DE DEMOLIÇÃO",
+    "MICROTRONICS": "FERRAM. MICROTRÔNICAS",
+    "SPARTS": "PEÇAS DE REPOSIÇÃO",
+    "EXTRA": "CARGA ADICIONAL"
+  },
+  "LOAD": {
+    "LIGHT": "LEVE: Movimenta-se livremente, mistura-se fácil.",
+    "MEDIUM": "MÉDIO: Parece preparada para um trabalho.",
+    "HEAVY": "PESADA: Barulhenta ou lenta, bem notável."
+  },
+  "HARM": {
+    "name": "DANO",
+    "level_1": "▼E",
+    "level_2": "",
+    "level_3": "EXAUSTA",
+    "level_4": "CHEGOU SUA HORA 💀"
+  },
+  "WARN": {
+    "ROLL": "Nenhuma ATITUDE ou PERÍCIA selecionada"
+  },
+  "TOOLTIP": {
+    "glich_dice": "+ BUGADO DADO"
+  }
+}

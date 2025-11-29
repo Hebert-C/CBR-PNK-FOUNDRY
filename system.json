@@ -1,0 +1,35 @@
+{
+  "id": "CBRPNK",
+  "title": "CBR+PNK",
+  "description": "Unofficial system to CBR+PNK",
+  "authors": [
+    {
+      "name": "Hebert Chisté",
+      "discord": "Totha",
+      "url": "https://github.com/Hebert-C"
+    },
+    {
+      "name": "Emanuel Melo",
+      "discord": "emanoelmelo",
+      "url": "https://github.com/thecabinetofcuriosities"
+    }
+  ],
+  "version": "1.05",
+  "compatibility": {
+    "minimum": 11,
+    "verified": 13,
+    "maximum": 13
+  },
+  "esmodules": ["main.js"],
+  "styles": ["main.css"],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-br.json"
+    }
+  ],
+  "url": "https://github.com/Hebert-C/CBR-PNK-FOUNDRY",
+  "manifest": "https://raw.githubusercontent.com/Hebert-C/CBR-PNK-FOUNDRY/main/system.json",
+  "download": "https://github.com/Hebert-C/CBR-PNK-FOUNDRY/archive/refs/heads/main.zip"
+}
