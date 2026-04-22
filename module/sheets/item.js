@@ -1,24 +1,33 @@
-export default class cbrItem extends foundry.appv1.sheets.ItemSheet {
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 600,
-            height: 350,
-        });
+export default class cbrItem extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
+    static DEFAULT_OPTIONS = {
+        position: { width: 600, height: 350 },
+        form: { submitOnChange: true, closeOnSubmit: false }
+    };
+
+    static PARTS = {
+        form: { template: "" }
+    };
+
+    get item() { return this.document; }
+
+    _configureRenderOptions(options) {
+        super._configureRenderOptions(options);
+        this.constructor.PARTS.form.template = `systems/CBRPNK/templates/sheets/items/${this.item.type}.hbs`;
     }
 
-    get template() {
-        return `systems/CBRPNK/templates/sheets/items/${this.item.type}.hbs`;
-    }
-
-    getData() {
-        const context = super.getData();
-        context.system = context.item.system;
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        context.item = this.item;
+        context.system = this.item.system;
+        context.editable = this.isEditable;
+        context.owner = this.item.isOwner;
         return context;
     }
 
-    activateListeners(html) {
-        super.activateListeners(html);
-        html.find(`#${this.item._id}_addStack`).mousedown( this._changeStack.bind(this) );
+    _onRender(context, options) {
+        const form = this.element.querySelector("form");
+        if (!form) return;
+        form.querySelector(`#${this.item.id}_addStack`)?.addEventListener("mousedown", this._changeStack.bind(this));
     }
 
     _changeStack(event) {
