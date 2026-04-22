@@ -13,12 +13,12 @@ async function preloadHandlebarTemplates() {
 Hooks.once("init", async function () {
     console.log('Start');
 
-    foundry.documents.collections.Items.unregisterSheet("core",foundry.appv1.sheets.ItemSheet);
+    foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
     foundry.documents.collections.Items.registerSheet("cbr", cbrItem, {makeDefault: true});
 
-    foundry.documents.collections.Actors.unregisterSheet("core", ActorSheet);
-    foundry.documents.collections.Actors.registerSheet("cbr", cbrRunner, {types: ["runner"],makeDefault: true});
-    foundry.documents.collections.Actors.registerSheet("cbr", cbrHunter, {types: ["hunter"],makeDefault: true});
+    foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+    foundry.documents.collections.Actors.registerSheet("cbr", cbrRunner, {types: ["runner"], makeDefault: true});
+    foundry.documents.collections.Actors.registerSheet("cbr", cbrHunter, {types: ["hunter"], makeDefault: true});
 
     CbrSettings.register();
 

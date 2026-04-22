@@ -1,54 +1,52 @@
-export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 440,
-            height: 790,
-        });
-    }
+export default class cbrRunner extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
+    static DEFAULT_OPTIONS = {
+        position: { width: 440, height: 790 },
+        form: { submitOnChange: true, closeOnSubmit: false }
+    };
 
-    get template() {
-        return `systems/CBRPNK/templates/sheets/${this.actor.type}.hbs`;
-    }
+    static PARTS = {
+        form: { template: "systems/CBRPNK/templates/sheets/runner.hbs" }
+    };
 
-    getData() {
-        const context = super.getData();
-        context.system = context.actor.system;
+    get actor() { return this.document; }
+
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        context.actor = this.actor;
+        context.system = this.actor.system;
+        context.editable = this.isEditable;
+        context.owner = this.actor.isOwner;
         context.system.wierd = game.settings.get("CBRPNK", "wiedModule");
         context.system.AugGlitchedCheck = game.settings.get("CBRPNK", "AugGlitchedCheck");
-
-        context.augs = context.items.filter( ({type}) => type === "augmentation");
-
+        context.augs = this.actor.items.filter(({type}) => type === "augmentation");
         return context;
     }
 
-    _onResize() {
-        if (this._element[0].offsetWidth > 600)
+    _onResize(event) {
+        if (this.element.offsetWidth > 600)
             this.actor.update({ "system.view": "grid" });
-        else 
+        else
             this.actor.update({ "system.view": "block" });
     }
 
-    activateListeners(html) {
-        super.activateListeners(html);
+    _onRender(context, options) {
+        const form = this.element.querySelector("form");
+        if (!form) return;
 
-        html.mousedown( this._RunnerOnMouseDown.bind(this) );
-        
-        html.find(`.throw`).mousedown( this.rolls.bind(this) );
-        html.find(`.roll`).mousedown( this.setRolls.bind(this) );
-
-        html.find(`button.item-delete`).mousedown( this._DeleteItem.bind(this) );
-        html.find(`.item-add`).mousedown( this._AddItem.bind(this) );
-        html.find(`.item-name`).change( this._itemName.bind(this) );
-        html.find(`.item-glitch`).mousedown( this._ToggleGlitch.bind(this) );
-        html.find(`.item-isOpen`).mousedown( this._itemOpen.bind(this) );
-        html.find(`.item-active`).mousedown( this._itemActive.bind(this) );
-        html.find(`.item-edit`).mousedown( this._itemEdit.bind(this) );
-
-        html.find(`.dots`).mousedown( this._setSkill.bind(this) );
-        html.find(`h3:is([data-app],[data-skill])`).mousedown( this._SelectAppSkill.bind(this) );
-        html.find(`[data-exp]`).mousedown( this._SelectEpx.bind(this) );
-        html.find(`.flaw`).mousedown( this._SetGlichApp.bind(this) );
-
+        form.addEventListener("mousedown", this._RunnerOnMouseDown.bind(this));
+        form.querySelectorAll(".throw").forEach(el => el.addEventListener("mousedown", this.rolls.bind(this)));
+        form.querySelectorAll(".roll").forEach(el => el.addEventListener("mousedown", this.setRolls.bind(this)));
+        form.querySelectorAll("button.item-delete").forEach(el => el.addEventListener("mousedown", this._DeleteItem.bind(this)));
+        form.querySelectorAll(".item-add").forEach(el => el.addEventListener("mousedown", this._AddItem.bind(this)));
+        form.querySelectorAll(".item-name").forEach(el => el.addEventListener("change", this._itemName.bind(this)));
+        form.querySelectorAll(".item-glitch").forEach(el => el.addEventListener("mousedown", this._ToggleGlitch.bind(this)));
+        form.querySelectorAll(".item-isOpen").forEach(el => el.addEventListener("mousedown", this._itemOpen.bind(this)));
+        form.querySelectorAll(".item-active").forEach(el => el.addEventListener("mousedown", this._itemActive.bind(this)));
+        form.querySelectorAll(".item-edit").forEach(el => el.addEventListener("mousedown", this._itemEdit.bind(this)));
+        form.querySelectorAll(".dots").forEach(el => el.addEventListener("mousedown", this._setSkill.bind(this)));
+        form.querySelectorAll("h3:is([data-app],[data-skill])").forEach(el => el.addEventListener("mousedown", this._SelectAppSkill.bind(this)));
+        form.querySelectorAll("[data-exp]").forEach(el => el.addEventListener("mousedown", this._SelectEpx.bind(this)));
+        form.querySelectorAll(".flaw").forEach(el => el.addEventListener("mousedown", this._SetGlichApp.bind(this)));
     }
 
     rolls ( event ) {
@@ -149,36 +147,36 @@ export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
                     const selectGear = event.target.getAttribute('data-type');
                     if ( selectGear === "eq21" && btnClick == "l" )
                         this.actor.update({
-                            [`system.GEAR.Equpment.${selectGear}.stack`] : Math.min(
-                                this.actor.system.GEAR.Equpment[selectGear].stack + 1,
-                                this.actor.system.GEAR.Equpment[selectGear].max
+                            [`system.GEAR.Equipment.${selectGear}.stack`] : Math.min(
+                                this.actor.system.GEAR.Equipment[selectGear].stack + 1,
+                                this.actor.system.GEAR.Equipment[selectGear].max
                             ),
                             [`system.GEAR.LOAD.value`] : this.actor.system.GEAR.LOAD.value +
-                                (this.actor.system.GEAR.Equpment[selectGear].stack === this.actor.system.GEAR.Equpment[selectGear].max ? 0 : 1)
+                                (this.actor.system.GEAR.Equipment[selectGear].stack === this.actor.system.GEAR.Equipment[selectGear].max ? 0 : 1)
                         });
                     else if ( selectGear === "eq21" && btnClick == "r" )
                         this.actor.update({
-                            [`system.GEAR.Equpment.${selectGear}.stack`] : Math.max(this.actor.system.GEAR.Equpment[selectGear].stack - 1, 0),
+                            [`system.GEAR.Equipment.${selectGear}.stack`] : Math.max(this.actor.system.GEAR.Equipment[selectGear].stack - 1, 0),
                             [`system.GEAR.LOAD.value`] : Math.max(this.actor.system.GEAR.LOAD.value - 1, 0)
                         });
                     else if ( btnClick == "l" ) 
                         this.actor.update({
-                            [`system.GEAR.Equpment.${selectGear}.stack`] : Math.min(
-                                this.actor.system.GEAR.Equpment[selectGear].stack + 1,
-                                this.actor.system.GEAR.Equpment[selectGear].max
+                            [`system.GEAR.Equipment.${selectGear}.stack`] : Math.min(
+                                this.actor.system.GEAR.Equipment[selectGear].stack + 1,
+                                this.actor.system.GEAR.Equipment[selectGear].max
                             )
                         });
                     else if ( btnClick == "r" ) 
                         this.actor.update({
-                            [`system.GEAR.Equpment.${selectGear}.stack`] : Math.max(this.actor.system.GEAR.Equpment[selectGear].stack - 1, 0)
+                            [`system.GEAR.Equipment.${selectGear}.stack`] : Math.max(this.actor.system.GEAR.Equipment[selectGear].stack - 1, 0)
                         });
                 }
                 else if ( event.target.closest('label') ){
                     const selectGear = event.target.closest('label').getAttribute("data-id");
-                    const isUse = this.actor.system.GEAR.Equpment[selectGear].isUse;
-                    const gearValue = this.actor.system.GEAR.Equpment[selectGear].value;
+                    const isUse = this.actor.system.GEAR.Equipment[selectGear].isUse;
+                    const gearValue = this.actor.system.GEAR.Equipment[selectGear].value;
                     this.actor.update({
-                        [`system.GEAR.Equpment.${selectGear}.isUse`] : !isUse,
+                        [`system.GEAR.Equipment.${selectGear}.isUse`] : !isUse,
                         [`system.GEAR.LOAD.value`] : Math.max(0 , (!isUse ? this.actor.system.GEAR.LOAD.value + gearValue : this.actor.system.GEAR.LOAD.value - gearValue)
                         )
                     });
@@ -202,16 +200,18 @@ export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
     }
 
     async actionRoll(){
+        const approachDice = this.actor.system.approach[this.actor.system.roll.approach].dice;
+        const skillDice = (this.actor.system.skills[this.actor.system.roll.skill] || {dice: 0}).dice;
         const dataRoll = {
             ...this.actor.system.roll,
-            GLICHED: 
-                this.actor.items.map( ({system}) => 
+            GLICHED:
+                this.actor.items.map( ({system}) =>
                     system.isGLICHED && ( !this.actor.system.AugGlitchedCheck || system.isActive )
-                ).filter(x => x).length + 
-                this.actor.system.approach[this.actor.system.roll.approach].GLICHED + 
+                ).filter(x => x).length +
+                this.actor.system.approach[this.actor.system.roll.approach].GLICHED +
                 this.actor.system.roll.isGlichDice,
-            dices: `${this.actor.system.approach[this.actor.system.roll.approach].dice} + ${(this.actor.system.skills[this.actor.system.roll.skill]||{dice: 0}).dice}`
-        }, dicePool = Math.min(6, eval([dataRoll.dices, dataRoll.addDice||0, (this.actor.system.roll.isGlichDice ? 1 : 0)].join('+')) );
+            dices: `${approachDice} + ${skillDice}`
+        }, dicePool = Math.min(6, approachDice + skillDice + (parseInt(dataRoll.addDice) || 0) + (this.actor.system.roll.isGlichDice ? 1 : 0));
         let letsRoll, rollResult = 0;
         const templateData = {
             title: "",
@@ -220,7 +220,7 @@ export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
             img: this.actor.img,
             name: this.actor.name,
             desc: "",
-            efect: dataRoll.efect,
+            effect: dataRoll.effect,
             threat: dataRoll.threat,
             action: game.i18n.localize(`Skill.${dataRoll.skill}.name`),
             approach: game.i18n.localize(`Approach.${dataRoll.approach}.name`)
@@ -317,7 +317,7 @@ export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
         const dataRoll = {
             ...this.actor.system.roll,
             dices: `${this.actor.system.approach[this.actor.system.roll.approach].dice}`
-        }, dicePool = Math.min(6, eval([dataRoll.dices, dataRoll.addDice||0].join('+')) );
+        }, dicePool = Math.min(6, this.actor.system.approach[this.actor.system.roll.approach].dice + (parseInt(dataRoll.addDice) || 0));
         let letsRoll, rollResult = 0, stress = this.actor.system.stress.value;
         const templateData = {
             title: "",
@@ -396,7 +396,7 @@ export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
         const dataRoll = {
             ...this.actor.system.roll,
             dices: `${this.actor.system.approach[this.actor.system.roll.approach].dice}`
-        }, dicePool = Math.min(6, eval([dataRoll.dices, dataRoll.addDice||0].join('+')) );
+        }, dicePool = Math.min(6, this.actor.system.approach[this.actor.system.roll.approach].dice + (parseInt(dataRoll.addDice) || 0));
         let letsRoll, rollResult = 0;
         const templateData = {
             title: "",
@@ -473,7 +473,7 @@ export default class cbrRunner extends foundry.appv1.sheets.ActorSheet {
             dices: `${this.actor.system.approach[this.actor.system.roll.approach].dice}`
         }, dicePool = Math.min(
             6,
-            eval(`${dataRoll.dices} + ${dataRoll.addDice||0} + ${this.actor.system.angle.CRED.value} - ${this.actor.system.angle.DEBT.value}`)
+            this.actor.system.approach[this.actor.system.roll.approach].dice + (parseInt(dataRoll.addDice) || 0) + this.actor.system.angle.CRED.value - this.actor.system.angle.DEBT.value
         );
         let letsRoll, rollResult = 0;
         const templateData = {

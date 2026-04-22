@@ -1,25 +1,28 @@
-export default class cbrHunter extends foundry.appv1.sheets.ActorSheet {
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 600,
-            height: 700,
-        });
-    }
+export default class cbrHunter extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
+    static DEFAULT_OPTIONS = {
+        position: { width: 600, height: 700 },
+        form: { submitOnChange: true, closeOnSubmit: false }
+    };
 
-    get template() {
-        return `systems/CBRPNK/templates/sheets/${this.actor.type}.hbs`;
-    }
+    static PARTS = {
+        form: { template: "systems/CBRPNK/templates/sheets/hunter.hbs" }
+    };
 
-    getData() {
-        const context = super.getData();
-        context.system = context.actor.system;
+    get actor() { return this.document; }
+
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        context.actor = this.actor;
+        context.system = this.actor.system;
+        context.editable = this.isEditable;
+        context.owner = this.actor.isOwner;
         return context;
     }
 
-    activateListeners(html) {
-        super.activateListeners(html);
-
-        html.mousedown( this._HunterOnMouseDown.bind(this) );
+    _onRender(context, options) {
+        const form = this.element.querySelector("form");
+        if (!form) return;
+        form.addEventListener("mousedown", this._HunterOnMouseDown.bind(this));
     }
 
     _HunterOnMouseDown(event) {

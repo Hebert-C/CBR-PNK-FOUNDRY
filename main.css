@@ -578,21 +578,21 @@ section.roll {
 }
 
 .threat .label,
-.efect .label {
+.effect .label {
   width: min-content;
 }
 
-.efect label {
+.effect label {
   background: rgb(var(--blue));
 }
 
-.efect label:has(:checked) {
+.effect label:has(:checked) {
   background: rgb(var(--blue));
   
   flex-grow: 1;
 }
 
-.efect label:has(:checked)~label {
+.effect label:has(:checked)~label {
   background: rgb(var(--wierd));
 }
 
@@ -1654,16 +1654,6 @@ section.skills p span,
   position: relative;
 }
 
-.glichedDice:hover label::after {
-  position: absolute;
-  content: attr(data-tip);
-  background: rgb(var(--blue));
-  padding: 5px;
-  border: 3px solid rgb(var(--gray));
-  left: -200%;
-  bottom: -200%;
-}
-
 header.window-header.flexrow.draggable.resizable {
   background: rgb(var(--blue));
   color: rgb(var(--white));
@@ -1705,10 +1695,6 @@ a.document-id-link {
 
 .armors label {
   cursor: pointer;
-}
-
-.glichedDice:hover label {
-  position: relative;
 }
 
 .hunt:hover::after,
@@ -1721,49 +1707,6 @@ a.document-id-link {
   top: 100%;
   right: 0;
   color: rgb(var(--white));
-}
-
-header.window-header.flexrow.draggable.resizable {
-  background: rgb(var(--blue));
-  color: rgb(var(--white));
-  padding: 0;
-  margin: 0;
-}
-
-a.header-button.control.configure-sheet,
-a.header-button.control.configure-token,
-a.header-button.control.close  {
-  font-size: 0;
-  border: 2px solid rgb(var(--black));
-  margin: 0;
-  padding: 4px 12px;
-}
-
-a.header-button.control.configure-sheet {
-  background: rgb(var(--yellow));
-}
-
-a.header-button.control.close {
-  background: rgb(var(--red));
-}
-
-a.header-button.control.configure-sheet i,
-a.header-button.control.configure-token i,
-a.header-button.control.close i {
-  font-size: large;
-  color: rgb(var(--black))
-}
-
-h4.window-title {
-  font-size: 24px;
-}
-
-a.document-id-link {
-  display: none;
-}
-
-.armors label {
-  cursor: pointer;
 }
 
 section.stress,

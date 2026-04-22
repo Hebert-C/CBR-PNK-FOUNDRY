@@ -24,7 +24,7 @@
                 "SR": false
             },
             "roll": {
-                "efect": 2,
+                "effect": 2,
                 "threat": 2,
                 "approach": "",
                 "skill": "",
@@ -169,7 +169,7 @@
                     "medium": { "value": 5 },
                     "heavy": { "value": 7 }
                 },
-                "Equpment": {
+                "Equipment": {
                     "eq1": {
                         "name": "A BLADE OR TWO",
                         "isUse": false,
