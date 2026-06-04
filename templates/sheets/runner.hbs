@@ -50,9 +50,9 @@
         </div>
       </div>
       <div class="buttons">
-        <button id="{{actor._id}}_resistRoll" class="resistRoll throw">{{localize 'ROLL.ResistRoll'}}</button>
-        <button id="{{actor._id}}_actionRoll" class="actionRoll throw">{{localize 'ROLL.ActionRoll'}}</button>
-        <button id="{{actor._id}}_breathRoll" class="breathRoll throw">{{localize 'ROLL.BreathRoll'}}</button>
+        <button type="button" id="{{actor._id}}_resistRoll" class="resistRoll throw">{{localize 'ROLL.ResistRoll'}}</button>
+        <button type="button" id="{{actor._id}}_actionRoll" class="actionRoll throw">{{localize 'ROLL.ActionRoll'}}</button>
+        <button type="button" id="{{actor._id}}_breathRoll" class="breathRoll throw">{{localize 'ROLL.BreathRoll'}}</button>
       </div>
     </section>
   </header>
@@ -245,7 +245,7 @@
     </table>
   </section>
   <section class="augmentations">
-    <h3>{{localize 'RUNNER.AUG'}} <button class="item-add">+</button></h3>
+    <h3>{{localize 'RUNNER.AUG'}} <button type="button" class="item-add">+</button></h3>
     {{#each augs as |aug id|}}
         {{> "systems/CBRPNK/templates/sheets/parts/augmentation.hbs" aug}}
     {{/each}}
@@ -264,7 +264,7 @@
       {{/if}}
     </h3>
     <div>
-      <button class="load">
+      <button type="button" class="load">
       {{#if (isEqual system.GEAR.LOAD.selected "light")}}
         {{localize 'LOAD.LIGHT'}}
       {{/if}}

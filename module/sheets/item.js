@@ -34,10 +34,10 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
         const form = this.element.querySelector("form");
         if (!form) return;
 
-        form.addEventListener("change", async (event) => {
+        form.addEventListener("change", async () => {
             if (!this.isEditable) return;
             const fd = new FormDataExtended(form);
-            await this._onSubmitForm(event, form, fd);
+            await this.document.update(foundry.utils.expandObject(fd.object));
         });
 
         form.querySelector(`#${this.item.id}_addStack`)?.addEventListener("mousedown", this._changeStack.bind(this));

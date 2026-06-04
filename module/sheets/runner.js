@@ -50,11 +50,11 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const form = this.element.querySelector("form");
         if (!form) return;
 
-        // submitOnChange manual: salva todos os campos system.* ao mudar
-        form.addEventListener("change", async (event) => {
+        // submitOnChange manual para V12
+        form.addEventListener("change", async () => {
             if (!this.isEditable) return;
             const fd = new FormDataExtended(form);
-            await this._onSubmitForm(event, form, fd);
+            await this.document.update(foundry.utils.expandObject(fd.object));
         });
 
         form.addEventListener("mousedown", this._RunnerOnMouseDown.bind(this));

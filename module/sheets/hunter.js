@@ -37,10 +37,10 @@ export default class cbrHunter extends foundry.applications.api.HandlebarsApplic
         const form = this.element.querySelector("form");
         if (!form) return;
 
-        form.addEventListener("change", async (event) => {
+        form.addEventListener("change", async () => {
             if (!this.isEditable) return;
             const fd = new FormDataExtended(form);
-            await this._onSubmitForm(event, form, fd);
+            await this.document.update(foundry.utils.expandObject(fd.object));
         });
 
         form.addEventListener("mousedown", this._HunterOnMouseDown.bind(this));
