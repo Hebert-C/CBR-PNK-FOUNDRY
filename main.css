@@ -625,12 +625,30 @@ section.roll {
   border-color: rgb(var(--blue));
 }
 
-/* V1 app + V2 application — ambos precisam de scroll e padding zerado */
-.sheet.window-app .window-content,
-.application.sheet.window-app .window-content {
+/* V1 */
+.sheet.window-app .window-content {
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+/* V2 ApplicationV2 — flex coluna para scroll funcionar */
+.application.sheet.window-app {
+  display: flex;
+  flex-direction: column;
+}
+
+.application.sheet.window-app .window-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.application.sheet.window-app section[data-application-part] {
+  display: block;
+  overflow: visible;
 }
 
 li.chat-message.message.flexcol:has(.runner) {
