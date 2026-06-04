@@ -7,7 +7,7 @@ async function preloadHandlebarTemplates() {
     const templatepaths = [
       "systems/CBRPNK/templates/sheets/parts/augmentation.hbs",
     ];
-    return foundry.applications.handlebars.loadTemplates(templatepaths);
+    return loadTemplates(templatepaths);
   }
 
 Hooks.once("init", async function () {

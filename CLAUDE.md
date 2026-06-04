@@ -129,10 +129,19 @@ async _renderHTML(context, options) {
 ### Carregamento de templates parciais
 
 ```javascript
-foundry.applications.handlebars.loadTemplates([
+// Usar global loadTemplates — foundry.applications.handlebars não existe nessa build
+loadTemplates([
     "systems/CBRPNK/templates/sheets/parts/augmentation.hbs"
 ]);
 ```
+
+### Caminhos de assets no CSS
+
+Usar sempre `/systems/CBRPNK/assets/...` (caminho absoluto correto no servidor Foundry):
+```css
+src: url('/systems/CBRPNK/assets/material-symbols/MaterialSymbolsOutlined.woff2');
+```
+**Não usar** `/CBRPNK/assets/...` — o Foundry serve sistemas em `/systems/<id>/`.
 
 ---
 
@@ -155,6 +164,8 @@ foundry.applications.handlebars.loadTemplates([
 | 1.09 | `foundry.appv1` undefined | Namespace inexistente nessa build | Remover `unregisterSheet` |
 | 1.11 | "Template part must render a single HTML element" | `<link>` + `<form>` como dois elementos raiz no `runner.hbs` | Remover `<link>` redundante (fonte já está no CSS) |
 | 1.12 | `{{editor}}` sem enriquecimento; `user` → `author` | API V12 exige pré-enriquecimento; `ChatMessage#user` renomeado | `TextEditor.enrichHTML` + `author:` |
+| 1.13 | `foundry.applications.handlebars` undefined | Namespace inexistente nessa build | Usar global `loadTemplates` |
+| 1.13 | Fonte Material Symbols 404 | Caminho `/CBRPNK/assets/` errado | Corrigir para `/systems/CBRPNK/assets/` |
 
 ---
 

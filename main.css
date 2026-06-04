@@ -2,19 +2,19 @@
 @font-face {
 	font-family: 'Material Symbols Outlined';
 	font-style: normal;
-	src: url('/CBRPNK/assets/material-symbols/MaterialSymbolsOutlined[FILL\,GRAD\,opsz\,wght].woff2') format('woff');
+	src: url('/systems/CBRPNK/assets/material-symbols/MaterialSymbolsOutlined[FILL\,GRAD\,opsz\,wght].woff2') format('woff');
 }
 
 @font-face {
 	font-family: 'Material Symbols Rounded';
 	font-style: normal;
-	src: url('/CBRPNK/assets/material-symbols/MaterialSymbolsRounded[FILL\,GRAD\,opsz\,wght].woff2') format('woff');
+	src: url('/systems/CBRPNK/assets/material-symbols/MaterialSymbolsRounded[FILL\,GRAD\,opsz\,wght].woff2') format('woff');
 }
 
 @font-face {
 	font-family: 'Material Symbols Sharp';
 	font-style: normal;
-	src: url('/CBRPNK/assets/material-symbols/MaterialSymbolsSharp[FILL\,GRAD\,opsz\,wght].woff2') format('woff');
+	src: url('/systems/CBRPNK/assets/material-symbols/MaterialSymbolsSharp[FILL\,GRAD\,opsz\,wght].woff2') format('woff');
 }
 
 :root {
