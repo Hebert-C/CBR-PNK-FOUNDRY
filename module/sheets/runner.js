@@ -36,6 +36,17 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
     }
 
     _onRender(context, options) {
+        super._onRender(context, options);
+
+        // Corrige scroll no V12: window-content precisa de overflow-y explícito
+        const windowContent = this.element.querySelector(".window-content");
+        if (windowContent) {
+            windowContent.style.overflowY = "auto";
+            windowContent.style.overflowX = "hidden";
+            const part = windowContent.querySelector("[data-application-part]");
+            if (part) part.style.overflow = "visible";
+        }
+
         const form = this.element.querySelector("form");
         if (!form) return;
 

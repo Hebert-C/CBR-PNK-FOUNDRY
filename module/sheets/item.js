@@ -30,6 +30,7 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
     }
 
     _onRender(context, options) {
+        super._onRender(context, options);
         const form = this.element.querySelector("form");
         if (!form) return;
         form.querySelector(`#${this.item.id}_addStack`)?.addEventListener("mousedown", this._changeStack.bind(this));
