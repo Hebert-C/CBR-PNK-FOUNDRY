@@ -10,6 +10,11 @@ async function preloadHandlebarTemplates() {
     return loadTemplates(templatepaths);
   }
 
+Hooks.once("i18nInit", async function () {
+    const translations = await fetch("systems/CBRPNK/lang/pt-br.json").then(r => r.json());
+    foundry.utils.mergeObject(game.i18n.translations, translations);
+});
+
 Hooks.once("init", async function () {
     console.log('Start');
 

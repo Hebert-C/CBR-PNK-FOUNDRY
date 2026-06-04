@@ -14,7 +14,7 @@
       "url": "https://github.com/thecabinetofcuriosities"
     }
   ],
-  "version": "1.15",
+  "version": "1.16",
   "compatibility": {
     "minimum": 12,
     "verified": 13,
@@ -23,11 +23,6 @@
   "esmodules": ["main.js"],
   "styles": ["main.css"],
   "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/pt-br.json"
-    },
     {
       "lang": "pt-BR",
       "name": "Português (Brasil)",
