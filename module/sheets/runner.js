@@ -20,6 +20,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         context.wierd = game.settings.get("CBRPNK", "wiedModule");
         context.AugGlitchedCheck = game.settings.get("CBRPNK", "AugGlitchedCheck");
         context.augs = this.actor.items.filter(({type}) => type === "augmentation");
+        context.view = this.actor.system.view || "block";
         context.enrichedDetails = await TextEditor.enrichHTML(
             this.actor.system.angle.DETAILS ?? "",
             { relativeTo: this.actor, secrets: this.actor.isOwner, rollData: this.actor.getRollData?.() }

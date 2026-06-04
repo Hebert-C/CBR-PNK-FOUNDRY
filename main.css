@@ -490,6 +490,7 @@ section.gear p {
 }
 
 form.runnerCard {
+  display: block; /* fallback; sobrescrito por style="display: grid|block" */
   background: rgb(var(--white));
 }
 
