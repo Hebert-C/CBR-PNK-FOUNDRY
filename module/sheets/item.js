@@ -22,7 +22,8 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
         context.editable = this.isEditable;
         context.owner = this.item.isOwner;
         context.enrichedDesc = await TextEditor.enrichHTML(
-            this.item.system.desc ?? "", { relativeTo: this.item }
+            this.item.system.desc ?? "",
+            { relativeTo: this.item, secrets: this.item.isOwner, rollData: this.item.getRollData?.() }
         );
         return context;
     }

@@ -16,15 +16,10 @@ export default class cbrHunter extends foundry.applications.api.HandlebarsApplic
         context.system = this.actor.system;
         context.editable = this.isEditable;
         context.owner = this.actor.isOwner;
-        context.enrichedDesc = await TextEditor.enrichHTML(
-            this.actor.system.desc ?? "", { relativeTo: this.actor }
-        );
-        context.enrichedAugDesc = await TextEditor.enrichHTML(
-            this.actor.system.AUGMENTATION.desc ?? "", { relativeTo: this.actor }
-        );
-        context.enrichedAbilityDesc = await TextEditor.enrichHTML(
-            this.actor.system.Ability.desc ?? "", { relativeTo: this.actor }
-        );
+        const enrichOpts = { relativeTo: this.actor, secrets: this.actor.isOwner, rollData: this.actor.getRollData?.() };
+        context.enrichedDesc        = await TextEditor.enrichHTML(this.actor.system.desc ?? "", enrichOpts);
+        context.enrichedAugDesc     = await TextEditor.enrichHTML(this.actor.system.AUGMENTATION.desc ?? "", enrichOpts);
+        context.enrichedAbilityDesc = await TextEditor.enrichHTML(this.actor.system.Ability.desc ?? "", enrichOpts);
         return context;
     }
 
