@@ -34,6 +34,20 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
         const form = this.element.querySelector("form");
         if (!form) return;
 
+        this.element.querySelectorAll("img[data-edit]").forEach(img => {
+            img.style.cursor = "pointer";
+            img.addEventListener("click", async () => {
+                if (!this.isEditable) return;
+                const field = img.dataset.edit;
+                const current = foundry.utils.getProperty(this.item, field);
+                new FilePicker({
+                    type: "image",
+                    current: current,
+                    callback: path => this.item.update({ [field]: path })
+                }).browse();
+            });
+        });
+
         form.addEventListener("change", async () => {
             if (!this.isEditable) return;
             const fd = new FormDataExtended(form);

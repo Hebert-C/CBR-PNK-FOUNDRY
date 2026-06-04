@@ -50,6 +50,21 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const form = this.element.querySelector("form");
         if (!form) return;
 
+        // Edição de imagem (data-edit="img" não é processado automaticamente no V12)
+        this.element.querySelectorAll("img[data-edit]").forEach(img => {
+            img.style.cursor = "pointer";
+            img.addEventListener("click", async () => {
+                if (!this.isEditable) return;
+                const field = img.dataset.edit;
+                const current = foundry.utils.getProperty(this.actor, field);
+                new FilePicker({
+                    type: "image",
+                    current: current,
+                    callback: path => this.actor.update({ [field]: path })
+                }).browse();
+            });
+        });
+
         // submitOnChange manual para V12
         form.addEventListener("change", async () => {
             if (!this.isEditable) return;
