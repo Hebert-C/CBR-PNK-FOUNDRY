@@ -3,7 +3,7 @@
         <img src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
         <div class="persona">
             <input name="name" type="text" placeholder="Name" value="{{actor.name}}"/>
-            {{editor system.desc target="system.desc" button=true owner=owner editable=editable}}
+            {{editor enrichedDesc target="system.desc" button=true editable=editable}}
             <div class="tracks">
                 <div class="activation">
                     <p>{{localize 'HUNTER.ACTIVATION'}}</p>
@@ -28,12 +28,12 @@
         <div class="AUGMENTATION">
             <h3>{{localize 'RUNNER.AUG'}}</h3>
             <input type="text" name="system.AUGMENTATION.name" value="{{system.AUGMENTATION.name}}">
-            {{editor system.AUGMENTATION.desc target="system.AUGMENTATION.desc" button=true owner=owner editable=editable}}
+            {{editor enrichedAugDesc target="system.AUGMENTATION.desc" button=true editable=editable}}
         </div>
         <div class="Ability">
             <h3>{{localize 'RUNNER.ABILITY'}}</h3>
             <input type="text" name="system.Ability.name" value="{{system.Ability.name}}">
-            {{editor system.Ability.desc target="system.Ability.desc" button=true owner=owner editable=editable}}
+            {{editor enrichedAbilityDesc target="system.Ability.desc" button=true editable=editable}}
         </div>
     </div>
     <div class="rank">

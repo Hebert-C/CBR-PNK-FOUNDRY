@@ -10,9 +10,9 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
 
     get item() { return this.document; }
 
-    _configureRenderOptions(options) {
-        super._configureRenderOptions(options);
-        this.constructor.PARTS.form.template = `systems/CBRPNK/templates/sheets/items/${this.item.type}.hbs`;
+    async _renderHTML(context, options) {
+        const template = `systems/CBRPNK/templates/sheets/items/${this.item.type}.hbs`;
+        return { form: await renderTemplate(template, context) };
     }
 
     async _prepareContext(options) {
@@ -21,6 +21,9 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
         context.system = this.item.system;
         context.editable = this.isEditable;
         context.owner = this.item.isOwner;
+        context.enrichedDesc = await TextEditor.enrichHTML(
+            this.item.system.desc ?? "", { relativeTo: this.item }
+        );
         return context;
     }
 

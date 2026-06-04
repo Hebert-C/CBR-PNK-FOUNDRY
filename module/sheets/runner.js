@@ -19,6 +19,9 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         context.wierd = game.settings.get("CBRPNK", "wiedModule");
         context.AugGlitchedCheck = game.settings.get("CBRPNK", "AugGlitchedCheck");
         context.augs = this.actor.items.filter(({type}) => type === "augmentation");
+        context.enrichedDetails = await TextEditor.enrichHTML(
+            this.actor.system.angle.DETAILS ?? "", { relativeTo: this.actor }
+        );
         return context;
     }
 
@@ -278,7 +281,6 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const content = await renderTemplate('systems/CBRPNK/templates/roll-card.hbs', templateData);
 
         ChatMessage.create({
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
@@ -377,7 +379,6 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const content = await renderTemplate('systems/CBRPNK/templates/roll-card.hbs', templateData);
 
         ChatMessage.create({
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
@@ -454,7 +455,6 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const content = await renderTemplate('systems/CBRPNK/templates/roll-card.hbs', templateData);
 
         ChatMessage.create({
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
@@ -527,7 +527,6 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const content = await renderTemplate('systems/CBRPNK/templates/roll-card.hbs', templateData);
 
         ChatMessage.create({
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),

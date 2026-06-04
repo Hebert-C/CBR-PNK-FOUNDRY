@@ -10,8 +10,8 @@
                     <div class="spoke">#{i}</div>
                 {{/for}}
             </div>
-            <button id="{{item.id}}_addStack"/>➕</button>
+            <button id="{{item.id}}_addStack">➕</button>
         </div>
-        {{editor system.desc target="system.desc" button=true owner=owner editable=editable}}
+        {{editor enrichedDesc target="system.desc" button=true editable=editable}}
     </div>
 </form>

@@ -4,7 +4,7 @@
     <section class="persona {{#if system.angle.hunted}}hunted{{/if}}">
       <div class="angle {{#if system.angle.isOpen}}expan{{/if}}">
         <input class="value" name="system.angle.for" type="text" placeholder="Why you runnig for?" value="{{system.angle.for}}"/>
-        {{editor system.angle.DETAILS target="system.angle.DETAILS" button=true owner=owner editable=editable}}
+        {{editor enrichedDetails target="system.angle.DETAILS" button=true editable=editable}}
         <div class="bar">
           <div class="DEBT" style="--progress: {{system.angle.DEBT.value}};">{{localize 'RUNNER.DEBT'}}</div>
           <div class="angelRoll throw"> {{localize 'ROLL.AngelRoll'}} </div>
