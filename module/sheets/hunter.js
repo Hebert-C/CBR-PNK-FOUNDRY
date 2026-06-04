@@ -2,7 +2,7 @@ export default class cbrHunter extends foundry.applications.api.HandlebarsApplic
     static DEFAULT_OPTIONS = {
         classes: ["sheet", "actor", "hunter"],
         position: { width: 600, height: 700 },
-        form: { submitOnChange: true, closeOnSubmit: false }
+        form: { closeOnSubmit: false }
     };
 
     static PARTS = {
@@ -36,6 +36,13 @@ export default class cbrHunter extends foundry.applications.api.HandlebarsApplic
 
         const form = this.element.querySelector("form");
         if (!form) return;
+
+        form.addEventListener("change", async (event) => {
+            if (!this.isEditable) return;
+            const fd = new FormDataExtended(form);
+            await this._onSubmitForm(event, form, fd);
+        });
+
         form.addEventListener("mousedown", this._HunterOnMouseDown.bind(this));
     }
 

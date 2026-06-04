@@ -2,7 +2,7 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
     static DEFAULT_OPTIONS = {
         classes: ["sheet", "item"],
         position: { width: 600, height: 350 },
-        form: { submitOnChange: true, closeOnSubmit: false }
+        form: { closeOnSubmit: false }
     };
 
     static PARTS = {
@@ -33,6 +33,13 @@ export default class cbrItem extends foundry.applications.api.HandlebarsApplicat
         super._onRender(context, options);
         const form = this.element.querySelector("form");
         if (!form) return;
+
+        form.addEventListener("change", async (event) => {
+            if (!this.isEditable) return;
+            const fd = new FormDataExtended(form);
+            await this._onSubmitForm(event, form, fd);
+        });
+
         form.querySelector(`#${this.item.id}_addStack`)?.addEventListener("mousedown", this._changeStack.bind(this));
     }
 

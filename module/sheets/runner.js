@@ -2,7 +2,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
     static DEFAULT_OPTIONS = {
         classes: ["sheet", "actor", "runner"],
         position: { width: 440, height: 790 },
-        form: { submitOnChange: true, closeOnSubmit: false }
+        form: { closeOnSubmit: false }
     };
 
     static PARTS = {
@@ -49,6 +49,13 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
 
         const form = this.element.querySelector("form");
         if (!form) return;
+
+        // submitOnChange manual: salva todos os campos system.* ao mudar
+        form.addEventListener("change", async (event) => {
+            if (!this.isEditable) return;
+            const fd = new FormDataExtended(form);
+            await this._onSubmitForm(event, form, fd);
+        });
 
         form.addEventListener("mousedown", this._RunnerOnMouseDown.bind(this));
         form.querySelectorAll(".throw").forEach(el => el.addEventListener("mousedown", this.rolls.bind(this)));
