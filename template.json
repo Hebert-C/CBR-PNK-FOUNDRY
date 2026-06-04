@@ -370,7 +370,7 @@
         }
     },
     "Item": {
-        "types": ["item", "augmentation"],
+        "types": ["item", "augmentation", "clock"],
         "item": {
             "desc": "",
             "stack": 0,
@@ -381,6 +381,11 @@
             "isOpen": false,
             "isGLICHED": false,
             "isActive": false
+        },
+        "clock": {
+            "segments": 6,
+            "filled": 0,
+            "desc": ""
         }
     }
 }

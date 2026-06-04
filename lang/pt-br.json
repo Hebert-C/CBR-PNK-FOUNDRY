@@ -267,6 +267,12 @@
     "level_3": "EXAUSTA",
     "level_4": "CHEGOU SUA HORA 💀"
   },
+  "CLOCK": {
+    "title": "RELÓGIOS",
+    "name": "Nome do Relógio",
+    "new": "Novo Relógio",
+    "segments": "Segmentos"
+  },
   "WARN": {
     "ROLL": "Nenhuma ATITUDE ou PERÍCIA selecionada"
   },

@@ -1,0 +1,14 @@
+<form autocomplete="off" class="clockCard">
+    <h1><input name="name" type="text" placeholder="{{localize 'CLOCK.name'}}" value="{{item.name}}"/></h1>
+    <div class="clock-container">
+        <svg class="clock-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        <p class="clock-count">{{system.filled}} / {{system.segments}}</p>
+    </div>
+    <div class="clock-controls">
+        <label>{{localize 'CLOCK.segments'}}</label>
+        <input type="number" name="system.segments" value="{{system.segments}}" min="2" max="20"/>
+    </div>
+    <div class="clock-desc">
+        {{editor enrichedDesc target="system.desc" button=true editable=editable}}
+    </div>
+</form>

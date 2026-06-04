@@ -1,6 +1,7 @@
 import cbrItem from "./module/sheets/item.js";
 import cbrRunner from "./module/sheets/runner.js";
 import cbrHunter from "./module/sheets/hunter.js";
+import cbrClock from "./module/sheets/clock.js";
 import { CbrSettings } from "./module/system.js";
 
 async function preloadHandlebarTemplates() {
@@ -18,9 +19,10 @@ Hooks.once("i18nInit", async function () {
 Hooks.once("init", async function () {
     console.log('Start');
 
-    Items.registerSheet("cbr", cbrItem, {makeDefault: true});
-    Actors.registerSheet("cbr", cbrRunner, {types: ["runner"], makeDefault: true});
-    Actors.registerSheet("cbr", cbrHunter, {types: ["hunter"], makeDefault: true});
+    Items.registerSheet("cbr", cbrItem,  { types: ["item", "augmentation"], makeDefault: true });
+    Items.registerSheet("cbr", cbrClock, { types: ["clock"], makeDefault: true });
+    Actors.registerSheet("cbr", cbrRunner, { types: ["runner"], makeDefault: true });
+    Actors.registerSheet("cbr", cbrHunter, { types: ["hunter"], makeDefault: true });
 
     CbrSettings.register();
 

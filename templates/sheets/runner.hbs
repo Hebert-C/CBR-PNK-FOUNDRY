@@ -250,6 +250,22 @@
         {{> "systems/CBRPNK/templates/sheets/parts/augmentation.hbs" aug}}
     {{/each}}
   </section>
+  <section class="clocks">
+    <h3>{{localize 'CLOCK.title'}} <button type="button" class="item-add">+</button></h3>
+    {{#each clocks as |clk|}}
+    <div class="clk" data-item-id="{{clk._id}}">
+      <svg class="clk-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="clk-info">
+        <span class="clk-name">{{clk.name}}</span>
+        <span class="clk-count">{{clk.system.filled}}/{{clk.system.segments}}</span>
+      </div>
+      <div class="clk-actions">
+        <button type="button" class="clk-edit"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="clk-delete"><i class="fa-regular fa-circle-xmark"></i></button>
+      </div>
+    </div>
+    {{/each}}
+  </section>
   <section class="gear">
     <h3>
       {{localize 'GEAR.name'}}: {{system.GEAR.LOAD.value}} /

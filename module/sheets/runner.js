@@ -1,3 +1,5 @@
+import { drawClockSVG } from "./clock.js";
+
 export default class cbrRunner extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
     static DEFAULT_OPTIONS = {
         classes: ["sheet", "actor", "runner"],
@@ -19,7 +21,8 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         context.owner = this.actor.isOwner;
         context.wierd = game.settings.get("CBRPNK", "wiedModule");
         context.AugGlitchedCheck = game.settings.get("CBRPNK", "AugGlitchedCheck");
-        context.augs = this.actor.items.filter(({type}) => type === "augmentation");
+        context.augs   = this.actor.items.filter(({type}) => type === "augmentation");
+        context.clocks = this.actor.items.filter(({type}) => type === "clock");
         context.view = this.actor.system.view || "block";
         context.enrichedDetails = await TextEditor.enrichHTML(
             this.actor.system.angle.DETAILS ?? "",
@@ -86,6 +89,35 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         form.querySelectorAll("h3:is([data-app],[data-skill])").forEach(el => el.addEventListener("mousedown", this._SelectAppSkill.bind(this)));
         form.querySelectorAll("[data-exp]").forEach(el => el.addEventListener("mousedown", this._SelectEpx.bind(this)));
         form.querySelectorAll(".flaw").forEach(el => el.addEventListener("mousedown", this._SetGlichApp.bind(this)));
+
+        // Relógios: desenha SVGs e registra interações
+        form.querySelectorAll(".clk-svg").forEach(svg => {
+            const itemId = svg.closest(".clk").dataset.itemId;
+            const item   = this.actor.items.get(itemId);
+            if (!item) return;
+            drawClockSVG(svg, item.system.segments, item.system.filled);
+
+            svg.addEventListener("click", (event) => {
+                if (!this.isEditable) return;
+                const seg = parseInt(event.target.dataset.segment);
+                if (!seg) return;
+                const filled = item.system.filled === seg ? seg - 1 : seg;
+                item.update({ "system.filled": Math.max(0, Math.min(filled, item.system.segments)) });
+            });
+
+            svg.addEventListener("contextmenu", (e) => {
+                e.preventDefault();
+                if (!this.isEditable) return;
+                item.update({ "system.filled": Math.max(0, item.system.filled - 1) });
+            });
+        });
+
+        form.querySelectorAll(".clk-delete").forEach(el => el.addEventListener("mousedown", (e) => {
+            this.actor.deleteEmbeddedDocuments("Item", [e.currentTarget.closest(".clk").dataset.itemId]);
+        }));
+        form.querySelectorAll(".clk-edit").forEach(el => el.addEventListener("mousedown", (e) => {
+            this.actor.items.get(e.currentTarget.closest(".clk").dataset.itemId)?.sheet.render(true);
+        }));
     }
 
     rolls ( event ) {
@@ -579,10 +611,10 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
     _AddItem( event ) {
         switch ( event.target.closest('section').classList[0] ) {
             case "augmentations":
-                Item.create({
-                    name: "Aug",
-                    type: "augmentation"
-                }, { parent: this.actor });
+                Item.create({ name: "Aug", type: "augmentation" }, { parent: this.actor });
+            break;
+            case "clocks":
+                Item.create({ name: game.i18n.localize("CLOCK.new"), type: "clock" }, { parent: this.actor });
             break;
             default: break;
         }
