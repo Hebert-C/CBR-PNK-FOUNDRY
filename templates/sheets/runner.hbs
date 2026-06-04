@@ -55,7 +55,7 @@
         <button id="{{actor._id}}_actionRoll" class="actionRoll throw">{{localize 'ROLL.ActionRoll'}}</button>
         <button id="{{actor._id}}_breathRoll" class="breathRoll throw">{{localize 'ROLL.BreathRoll'}}</button>
       </div>
-    </div>
+    </section>
   </header>
   <section class="stress">  
     <span class="label">{{localize 'RUNNER.STRESS'}}</span>
@@ -230,7 +230,7 @@
           <span data-exp="STREETWISE.NAVIGATION" class="{{#if system.skills.STREETWISE.EXPERTISES.NAVIGATION}}active{{/if}}">{{localize 'Skill.STREETWISE.NAVIGATION'}}</span>
         </p></td>
       </tr>
-      {{#if system.wierd}}
+      {{#if wierd}}
       <tr class="{{#if (isEqual system.roll.skill "ATTUNE")}}select{{/if}}">
         <td><h3 data-skill="ATTUNE">{{localize 'Skill.ATTUNE.name'}}</h3></td>
         <td><div class="dots" data-skill="skills.ATTUNE">

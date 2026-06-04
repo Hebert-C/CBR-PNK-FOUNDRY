@@ -1,8 +1,8 @@
 {
     "Actor": {
-        "view": "block",
         "types": ["runner", "hunter"],
         "runner": {
+            "view": "block",
             "isDarkMode": false,
             "angle": {
                 "isOpen": false,

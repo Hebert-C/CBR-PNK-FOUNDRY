@@ -16,8 +16,8 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         context.system = this.actor.system;
         context.editable = this.isEditable;
         context.owner = this.actor.isOwner;
-        context.system.wierd = game.settings.get("CBRPNK", "wiedModule");
-        context.system.AugGlitchedCheck = game.settings.get("CBRPNK", "AugGlitchedCheck");
+        context.wierd = game.settings.get("CBRPNK", "wiedModule");
+        context.AugGlitchedCheck = game.settings.get("CBRPNK", "AugGlitchedCheck");
         context.augs = this.actor.items.filter(({type}) => type === "augmentation");
         return context;
     }
@@ -103,12 +103,14 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
     }
 
     _RunnerOnMouseDown(event) {
-        const btnClick = 
+        const btnClick =
             (event.which === 1 || event.button === 0) ? "l" :
             (event.which === 2 || event.button === 1) ? "m" :
             (event.which === 3 || event.button === 2) ? "r" : null;
 
-        switch (event.target.closest("section").classList[0]) {
+        const section = event.target.closest("section");
+        if (!section) return;
+        switch (section.classList[0]) {
             case "persona":
                 if ( ["DEBT","CRED"].includes(event.target.classList[0]) ){
                     if (btnClick == "l") {
@@ -206,7 +208,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
             ...this.actor.system.roll,
             GLICHED:
                 this.actor.items.map( ({system}) =>
-                    system.isGLICHED && ( !this.actor.system.AugGlitchedCheck || system.isActive )
+                    system.isGLICHED && ( !game.settings.get("CBRPNK", "AugGlitchedCheck") || system.isActive )
                 ).filter(x => x).length +
                 this.actor.system.approach[this.actor.system.roll.approach].GLICHED +
                 this.actor.system.roll.isGlichDice,
@@ -228,11 +230,11 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
 
         if ( dicePool <= 0 ) {
             // dis Roll
-            letsRoll = await new Roll("2d6").roll({async:true});
+            letsRoll = await new Roll("2d6").roll();
             rollResult = [Math.min( ...letsRoll.terms[0].results.map( ({result}) => result) )];
         }else {
             // normal Roll
-            letsRoll =  await new Roll(dicePool+"d6").roll({async:true});
+            letsRoll =  await new Roll(dicePool+"d6").roll();
             rollResult = letsRoll.terms[0].results.map( ({result}) => result)
         }
 
@@ -278,7 +280,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         ChatMessage.create({
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
-            user: game.user._id,
+            user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
             content: content
         });
@@ -305,7 +307,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         const content = await renderTemplate('systems/CBRPNK/templates/roll-card.hbs', templateData);
 
         ChatMessage.create({
-            user: game.user._id,
+            user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
             content: content
         });
@@ -332,11 +334,11 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
 
         if ( dicePool <= 0 ) {
             // dis Roll
-            letsRoll = await new Roll("2d6").roll({async:true});
+            letsRoll = await new Roll("2d6").roll();
             rollResult = [Math.min( ...letsRoll.terms[0].results.map( ({result}) => result) )];
         }else {
             // normal Roll
-            letsRoll =  await new Roll(dicePool+"d6").roll({async:true});
+            letsRoll =  await new Roll(dicePool+"d6").roll();
             rollResult = letsRoll.terms[0].results.map( ({result}) => result)
         }
 
@@ -377,7 +379,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         ChatMessage.create({
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
-            user: game.user._id,
+            user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
             content: content
         });
@@ -411,11 +413,11 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
 
         if ( dicePool <= 0 ) {
             // dis Roll
-            letsRoll = await new Roll("2d6").roll({async:true});
+            letsRoll = await new Roll("2d6").roll();
             rollResult = [Math.min( ...letsRoll.terms[0].results.map( ({result}) => result) )];
         }else {
             // normal Roll
-            letsRoll =  await new Roll(dicePool+"d6").roll({async:true});
+            letsRoll =  await new Roll(dicePool+"d6").roll();
             rollResult = letsRoll.terms[0].results.map( ({result}) => result)
         }
 
@@ -454,7 +456,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         ChatMessage.create({
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
-            user: game.user._id,
+            user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
             content: content
         });
@@ -488,11 +490,11 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         };
         
         if (dicePool <= 0) {
-            letsRoll = await new Roll("2d6").roll({async:true});
+            letsRoll = await new Roll("2d6").roll();
             rollResult = [Math.min( ...letsRoll.terms[0].results.map( ({result}) => result) )];
         }
         else {
-            letsRoll =  await new Roll(dicePool+"d6").roll({async:true});
+            letsRoll =  await new Roll(dicePool+"d6").roll();
             rollResult = letsRoll.terms[0].results.map( ({result}) => result)
         }
 
@@ -527,7 +529,7 @@ export default class cbrRunner extends foundry.applications.api.HandlebarsApplic
         ChatMessage.create({
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [letsRoll],
-            user: game.user._id,
+            user: game.user.id,
             speaker: ChatMessage.getSpeaker({token: this.actor}),
             content: content
         });
