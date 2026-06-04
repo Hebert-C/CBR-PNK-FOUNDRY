@@ -1,5 +1,6 @@
 export default class cbrHunter extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
     static DEFAULT_OPTIONS = {
+        classes: ["sheet", "actor", "hunter"],
         position: { width: 600, height: 700 },
         form: { submitOnChange: true, closeOnSubmit: false }
     };

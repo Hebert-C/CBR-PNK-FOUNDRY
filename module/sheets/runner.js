@@ -1,5 +1,6 @@
 export default class cbrRunner extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
     static DEFAULT_OPTIONS = {
+        classes: ["sheet", "actor", "runner"],
         position: { width: 440, height: 790 },
         form: { submitOnChange: true, closeOnSubmit: false }
     };

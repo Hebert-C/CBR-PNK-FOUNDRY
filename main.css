@@ -624,9 +624,12 @@ section.roll {
   border-color: rgb(var(--blue));
 }
 
-.sheet.window-app .window-content {
+/* V1 app + V2 application — ambos precisam de scroll e padding zerado */
+.sheet.window-app .window-content,
+.application.sheet.window-app .window-content {
   padding: 0;
-  /* background: transparent; */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 li.chat-message.message.flexcol:has(.runner) {

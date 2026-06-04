@@ -135,6 +135,31 @@ loadTemplates([
 ]);
 ```
 
+### Classes no DEFAULT_OPTIONS
+
+Sempre definir `classes` explicitamente — garantem que os seletores CSS funcionem e que a janela ApplicationV2 receba as classes corretas:
+```javascript
+static DEFAULT_OPTIONS = {
+    classes: ["sheet", "actor", "runner"],  // runner sheet
+    // classes: ["sheet", "actor", "hunter"], // hunter sheet
+    // classes: ["sheet", "item"],            // item sheet
+    position: { width: 440, height: 790 },
+    form: { submitOnChange: true, closeOnSubmit: false }
+};
+```
+
+### CSS para scroll do .window-content
+
+Em V12, o ApplicationV2 usa `.application` em vez de `.app`. Cobrir ambos os seletores:
+```css
+.sheet.window-app .window-content,
+.application.sheet.window-app .window-content {
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+```
+
 ### Caminhos de assets no CSS
 
 Usar sempre `/systems/CBRPNK/assets/...` (caminho absoluto correto no servidor Foundry):
@@ -166,6 +191,8 @@ src: url('/systems/CBRPNK/assets/material-symbols/MaterialSymbolsOutlined.woff2'
 | 1.12 | `{{editor}}` sem enriquecimento; `user` → `author` | API V12 exige pré-enriquecimento; `ChatMessage#user` renomeado | `TextEditor.enrichHTML` + `author:` |
 | 1.13 | `foundry.applications.handlebars` undefined | Namespace inexistente nessa build | Usar global `loadTemplates` |
 | 1.13 | Fonte Material Symbols 404 | Caminho `/CBRPNK/assets/` errado | Corrigir para `/systems/CBRPNK/assets/` |
+| 1.14 | Sem barra de rolagem | `.window-content` sem `overflow-y: auto`; seletor CSS não cobria `.application` (V2) | Adicionar overflow + cobrir ambos seletores V1/V2 |
+| 1.14 | CSS não aplicando | `classes` não definidas em DEFAULT_OPTIONS | Adicionar `classes: ["sheet", "actor", ...]` explicitamente |
 
 ---
 

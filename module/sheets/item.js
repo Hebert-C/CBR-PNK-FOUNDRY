@@ -1,5 +1,6 @@
 export default class cbrItem extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2) {
     static DEFAULT_OPTIONS = {
+        classes: ["sheet", "item"],
         position: { width: 600, height: 350 },
         form: { submitOnChange: true, closeOnSubmit: false }
     };
